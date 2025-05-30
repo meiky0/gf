@@ -26,7 +26,6 @@ export function ConversationalAI() {
     onMessage: (message) => {
       console.log('Message received:', message);
       
-      // Handle any text content from messages
       if (message.message && typeof message.message === 'string') {
         setSubtitle(message.message);
         setTranscriptHistory(prev => [...prev.slice(-4), {
@@ -37,7 +36,6 @@ export function ConversationalAI() {
         }]);
       }
       
-      // Handle transcript field
       if (message.transcript && typeof message.transcript === 'string') {
         setSubtitle(message.transcript);
         setTranscriptHistory(prev => [...prev.slice(-4), {
@@ -48,7 +46,6 @@ export function ConversationalAI() {
         }]);
       }
       
-      // Handle text field
       if (message.text && typeof message.text === 'string') {
         setSubtitle(message.text);
         setTranscriptHistory(prev => [...prev.slice(-4), {
@@ -59,7 +56,6 @@ export function ConversationalAI() {
         }]);
       }
       
-      // Handle audio for visual effects
       if (message.type === 'audio' || message.audio) {
         setAudioScale(1.2);
         setTimeout(() => setAudioScale(1), 200);
@@ -237,6 +233,22 @@ export function ConversationalAI() {
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-[#DC5037]">
+      {/* Auth Buttons */}
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30 flex gap-4">
+        <button
+          className="bg-white text-[#DC5037] px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 font-semibold"
+          onClick={() => alert('Sign up functionality coming soon!')}
+        >
+          Sign Up
+        </button>
+        <button
+          className="bg-transparent border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-[#DC5037] transition-all duration-300 font-semibold"
+          onClick={() => alert('Login functionality coming soon!')}
+        >
+          Login
+        </button>
+      </div>
+
       {/* Connection Status Indicator */}
       <div className="absolute top-8 right-8 z-20">
         <div className={`w-3 h-3 rounded-full ${
@@ -248,7 +260,7 @@ export function ConversationalAI() {
 
       {/* Conversation History Panel */}
       {isStarted && transcriptHistory.length > 0 && (
-        <div className="absolute top-8 left-8 max-w-sm z-20">
+        <div className="absolute top-24 left-8 max-w-sm z-20">
           <div className="bg-black bg-opacity-60 backdrop-blur-sm p-4 rounded-lg max-h-48 overflow-y-auto">
             <h3 
               className="text-white text-sm font-bold mb-3 opacity-75"
@@ -283,7 +295,7 @@ export function ConversationalAI() {
         </div>
       )}
 
-      {/* 3D Visualizer Container - Centered */}
+      {/* 3D Visualizer Container */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div 
           className="flex items-center justify-center"
@@ -301,7 +313,7 @@ export function ConversationalAI() {
         </div>
       </div>
 
-      {/* Status Text - Above Visualizer */}
+      {/* Status Text */}
       {isStarted && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-32 z-10">
           <div className="text-white text-center">
@@ -315,7 +327,7 @@ export function ConversationalAI() {
         </div>
       )}
 
-      {/* Current Live Transcript - Below Visualizer */}
+      {/* Current Live Transcript */}
       {isStarted && subtitle && (
         <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 max-w-4xl px-6 z-10">
           <div className="bg-black bg-opacity-70 backdrop-blur-sm px-6 py-4 rounded-lg border-l-4 border-blue-400">
@@ -338,7 +350,7 @@ export function ConversationalAI() {
         </div>
       )}
 
-      {/* Control Button - Bottom */}
+      {/* Control Button */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
         {!isStarted ? (
           <button

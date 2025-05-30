@@ -1,4 +1,4 @@
-import { ConversationalAI } from '../app/components/ConvAI';
+import { ConversationalAI } from './components/ConvAI';
 
 export default function Home() {
   return (
